@@ -1,7 +1,3 @@
-# M300-Services-NIS
-Modul 300 von Gent Nishori
-
-
 # M300 – Toolumgebung einrichten  
 **Name:** Gent Nishori  
 **Modul:** M300 – Infrastruktur automatisieren  
@@ -78,11 +74,9 @@ http://localhost:8080
 Eigene Webseite
 Die Standardseite von Apache wurde angepasst.
 
+
 Pfad:
 /var/www/html/index.html
-
-![Apache_Webseite](apache.png)
-
 
 
 Fazit
@@ -122,7 +116,7 @@ Mit Vagrant werden virtuelle Maschinen erstellt und verwaltet.
 
 ### Welche Aussagen treffen zu?
 Richtig ist:  
-**b** Vagrant erzeugt virtuelle Maschinen und unterstützt verschiedene Hypervisoren und Cloud-Umgebungen.
+**b)** Vagrant erzeugt virtuelle Maschinen und unterstützt verschiedene Hypervisoren und Cloud-Umgebungen.
 
 ---
 
@@ -151,58 +145,3 @@ Der Befehl wurde in einem Verzeichnis ausgeführt, in dem keine `Vagrantfile` vo
 Das Wissen ist hilfreich für die **LPI DevOps Tools Engineer** Zertifizierung.
 
 ---
-
-
-## LB2 – Neue VM erstellen und Umgebung vorbereiten 
-
-**Ziel:**  
-Eine neue Test-VM mit Vagrant erstellen, um Serverdienste (Apache + Webalizer) zuerst manuell zu testen und danach zu automatisieren.
-
----
-
-### 1) Neue VM erstellen
-Im Arbeitsverzeichnis wurde ein neues VM-Verzeichnis erstellt und eine Vagrant-Umgebung initialisiert:
-
-```bash
-cd myM300/
-mkdir myVM
-cd myVM
-vagrant init ubuntu/xenial64
-vagrant up --provider virtualbox
-2) Verbindung zur VM (SSH)
-Nach dem Start wurde die VM via SSH betreten:
-
-vagrant ssh
-3) Webserver vom Host erreichbar machen (Port Forwarding)
-Damit der Apache-Webserver aus der VM im Browser auf dem Host erreichbar ist, wurde im Vagrantfile eine Portweiterleitung eingerichtet:
-
-config.vm.network "forwarded_port", guest: 80, host: 8081, auto_correct: true
-Hinweis:
-Standardmässig wird oft host: 8080 verwendet. Bei mir war der Port 8080 bereits belegt, deshalb wurde 8081 gewählt.
-
-4) Portweiterleitung aktivieren
-Nach der Änderung am Vagrantfile wurde die VM neu geladen, damit die Portweiterleitung übernommen wird:
-
-vagrant reload
-Anschliessend wurden die weitergeleiteten Ports geprüft:
-
-vagrant port
-Erwartetes Resultat (Beispiel):
-
-80 (guest) => 8081 (host)
-
-5) Zugriffstest im Browser
-Der Webserver kann nun über den Host-Browser getestet werden:
-
-Apache:
-http://localhost:8081
-
-Webalizer (später nach Installation):
-http://localhost:8081/webalizer/
-
-Problem / Lösung
-Problem: Port 8080 war auf dem Host bereits besetzt → Webseite nicht erreichbar.
-Lösung: Port im Vagrantfile auf 8081 geändert und VM mit vagrant reload neu geladen.
-
-![Webalizer Statistik](webalizer.png) 
-
