@@ -55,6 +55,13 @@ Modul 300 von Gent Nishori
     - [Fehler: Dockerfile leer](#fehler-dockerfile-leer)
   - [](#)
     - [Docker Netzwerke anzeigen](#docker-netzwerke-anzeigen)
+  - [LB3 – Hands-on (Docker)](#lb3--hands-on-docker)
+    - [Netzwerk für LB3 erstellen](#netzwerk-für-lb3-erstellen)
+    - [MySQL (Backend) starten](#mysql-backend-starten)
+    - [Ghost (Frontend) starten](#ghost-frontend-starten)
+    - [Eigenes Docker Image erstellen (Apache)](#eigenes-docker-image-erstellen-apache)
+    - [Problem: Container-Name bereits vergeben](#problem-container-name-bereits-vergeben)
+    - [Status prüfen (laufende Container)](#status-prüfen-laufende-container)
 
 <!-- /TOC -->
 
@@ -450,5 +457,131 @@ Standardmässig existieren:
 
 Docker verwendet standardmässig das `bridge` Netzwerk.
 
+---
+
+## LB3 – Hands-on (Docker)
+
+### Netzwerk für LB3 erstellen
+
+Zuerst wurde ein eigenes Docker-Netzwerk erstellt, damit sich die Container untereinander finden können:
+
+```bash
+docker network create lb3-net
+```
+
+---
+
+### MySQL (Backend) starten
+
+Der Datenbank-Container wurde gestartet und die notwendigen Umgebungsvariablen gesetzt:
+
+```bash
+docker run -d --name ghost_mysql --network lb3-net `
+  -e MYSQL_ROOT_PASSWORD=admin `
+  -e MYSQL_USER=ghost `
+  -e MYSQL_PASSWORD=secret `
+  -e MYSQL_DATABASE=ghost `
+  --restart=always `
+  mysql:5.7
+```
+
+Prüfen ob der Container läuft:
+
+```bash
+docker ps
+```
+
+Logs kontrollieren:
+
+```bash
+docker logs ghost_mysql
+```
+
+Ergebnis: MySQL ist bereit („ready for connections“).
+
+---
+
+### Ghost (Frontend) starten
+
+Ghost wurde im gleichen Netzwerk gestartet und mit der MySQL-Datenbank verbunden:
+
+```bash
+docker run -d --name ghost --network lb3-net `
+  -e database__client=mysql `
+  -e database__connection__host=ghost_mysql `
+  -e database__connection__user=ghost `
+  -e database__connection__password=secret `
+  -e database__connection__database=ghost `
+  -p 2368:2368 `
+  --restart=always `
+  ghost:1-alpine
+```
+
+Zugriff im Browser:
+
+- `http://localhost:2368`
+
+Screenshot:
+
+![Ghost Frontend](images/ghost.png)
+
+---
+
+### Eigenes Docker Image erstellen (Apache)
+
+Für den eigenen Container wurde ein Ordner erstellt und darin das Image gebaut:
+
+```bash
+mkdir lb3-apache
+cd lb3-apache
+docker build -t lb3-apache .
+```
+
+Container starten und Port freigeben:
+
+```bash
+docker run -d --name myapache -p 8080:80 lb3-apache
+```
+
+Zugriff im Browser:
+
+- `http://localhost:8080`
+
+---
+
+### Problem: Container-Name bereits vergeben
+
+Beim erneuten Starten trat ein Konflikt auf, da der Containername bereits existierte:
+
+Fehlermeldung (Beispiel):
+
+```
+Conflict. The container name "/myapache" is already in use ...
+```
+
+Lösung: Container stoppen und entfernen, danach erneut starten:
+
+```bash
+docker stop myapache
+docker rm myapache
+docker run -d --name myapache -p 8080:80 lb3-apache
+```
+
+---
+
+### Status prüfen (laufende Container)
+
+```bash
+docker ps
+```
+
+Ergebnis:
+- `ghost_mysql` läuft (Backend)
+- `ghost` läuft (Frontend)
+- `myapache` läuft (eigener Container)
+
+Beim Apache-Container war Healthcheck aktiv (Status z.B. `health: starting`).
+
+---
 
 
