@@ -1,6 +1,33 @@
 # M300-Services-NIS
 Modul 300 von Gent Nishori
+<!-- TOC -->
 
+- [M300-Services-NIS](#m300-services-nis)
+- [M300 – Toolumgebung einrichten](#m300--toolumgebung-einrichten)
+  - [Ziel](#ziel)
+  - [Verwendete Tools](#verwendete-tools)
+  - [Einrichtung der Toolumgebung](#einrichtung-der-toolumgebung)
+    - [Git \& GitHub](#git--github)
+    - [VirtualBox](#virtualbox)
+    - [Vagrant](#vagrant)
+- [M300 – Fragen \& Antworten](#m300--fragen--antworten)
+  - [Cloud Computing](#cloud-computing)
+    - [Was versteht man unter Cloud-Computing?](#was-versteht-man-unter-cloud-computing)
+    - [Was versteht man unter Infrastructure as a Service (IaaS)?](#was-versteht-man-unter-infrastructure-as-a-service-iaas)
+  - [Infrastructure as Code](#infrastructure-as-code)
+    - [Was ist der Unterschied zur manuellen Installation einer VM?](#was-ist-der-unterschied-zur-manuellen-installation-einer-vm)
+    - [Vagrant](#vagrant-1)
+  - [Was wird mit Vagrant erzeugt?](#was-wird-mit-vagrant-erzeugt)
+  - [Welche Aussagen treffen zu?](#welche-aussagen-treffen-zu)
+  - [In welchen Bereich des Cloud-Computings ist Vagrant einzuordnen?](#in-welchen-bereich-des-cloud-computings-ist-vagrant-einzuordnen)
+  - [Welche Alternativen zu Vagrant bestehen?](#welche-alternativen-zu-vagrant-bestehen)
+  - [Wo speichert Vagrant seine Konfiguration?](#wo-speichert-vagrant-seine-konfiguration)
+  - [Was bedeutet die Fehlermeldung](#was-bedeutet-die-fehlermeldung)
+    - [Bei welcher LPI-Zertifizierung nützt mir das Vagrant-Wissen?](#bei-welcher-lpi-zertifizierung-nützt-mir-das-vagrant-wissen)
+  - [LB2 – Neue VM erstellen und Umgebung vorbereiten](#lb2--neue-vm-erstellen-und-umgebung-vorbereiten)
+    - [1) Neue VM erstellen](#1-neue-vm-erstellen)
+
+<!-- /TOC -->
 
 # M300 – Toolumgebung einrichten  
 **Name:** Gent Nishori  
@@ -44,13 +71,14 @@ Sie dient als Provider für Vagrant.
 ### Vagrant
 Für die VM wurde ein neues Verzeichnis erstellt und eine Vagrant-Umgebung initialisiert:
 
-```bash```
+```bash
 vagrant init ubuntu/xenial64
 vagrant up
+```
 
 
 Anschliessend wurde per SSH eine Verbindung zur VM aufgebaut:
-vagrant ssh
+`vagrant ssh`
 
 
 Probleme und Lösungen
@@ -63,9 +91,10 @@ VirtualBox-Version.
 Apache Webserver
 Innerhalb der VM wurde der Apache Webserver installiert:
 
+```bash
 sudo apt-get update
 sudo apt-get install -y apache2
-
+```
 
 Der Webserver wurde erfolgreich getestet.
 Webzugriff vom Host
@@ -113,35 +142,35 @@ Infrastructure as Code ermöglicht eine automatisierte, reproduzierbare und doku
 
 ---
 
-## Vagrant
+### Vagrant
 
-### Was wird mit Vagrant erzeugt?
+## Was wird mit Vagrant erzeugt?
 Mit Vagrant werden virtuelle Maschinen erstellt und verwaltet.
 
 ---
 
-### Welche Aussagen treffen zu?
+## Welche Aussagen treffen zu?
 Richtig ist:  
 **b** Vagrant erzeugt virtuelle Maschinen und unterstützt verschiedene Hypervisoren und Cloud-Umgebungen.
 
 ---
 
-### In welchen Bereich des Cloud-Computings ist Vagrant einzuordnen?
+## In welchen Bereich des Cloud-Computings ist Vagrant einzuordnen?
 Vagrant ist dem Bereich **Infrastructure as a Service (IaaS)** zuzuordnen.
 
 ---
 
-### Welche Alternativen zu Vagrant bestehen?
+## Welche Alternativen zu Vagrant bestehen?
 Mögliche Alternativen sind z.B. Terraform, Docker, Packer oder direkte VirtualBox-Konfigurationen.
 
 ---
 
-### Wo speichert Vagrant seine Konfiguration?
+## Wo speichert Vagrant seine Konfiguration?
 Die Konfiguration wird im **Vagrantfile** gespeichert.
 
 ---
 
-### Was bedeutet die Fehlermeldung  
+## Was bedeutet die Fehlermeldung  
 „A Vagrant environment or target machine is required to run this command.“?
 Der Befehl wurde in einem Verzeichnis ausgeführt, in dem keine `Vagrantfile` vorhanden ist.
 
@@ -163,16 +192,19 @@ Eine neue Test-VM mit Vagrant erstellen, um Serverdienste (Apache + Webalizer) z
 ### 1) Neue VM erstellen
 Im Arbeitsverzeichnis wurde ein neues VM-Verzeichnis erstellt und eine Vagrant-Umgebung initialisiert:
 
-```bash```
+```bash
 cd myM300/
 mkdir myVM
 cd myVM
 vagrant init ubuntu/xenial64
 vagrant up --provider virtualbox
+```
 2) Verbindung zur VM (SSH)
 Nach dem Start wurde die VM via SSH betreten:
 
-vagrant ssh
+`vagrant ssh`
+
+
 3) Webserver vom Host erreichbar machen (Port Forwarding)
 Damit der Apache-Webserver aus der VM im Browser auf dem Host erreichbar ist, wurde im Vagrantfile eine Portweiterleitung eingerichtet:
 
