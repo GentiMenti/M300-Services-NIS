@@ -44,7 +44,7 @@ Sie dient als Provider für Vagrant.
 ### Vagrant
 Für die VM wurde ein neues Verzeichnis erstellt und eine Vagrant-Umgebung initialisiert:
 
-```bash
+```bash```
 vagrant init ubuntu/xenial64
 vagrant up
 
@@ -163,7 +163,7 @@ Eine neue Test-VM mit Vagrant erstellen, um Serverdienste (Apache + Webalizer) z
 ### 1) Neue VM erstellen
 Im Arbeitsverzeichnis wurde ein neues VM-Verzeichnis erstellt und eine Vagrant-Umgebung initialisiert:
 
-```bash
+```bash```
 cd myM300/
 mkdir myVM
 cd myVM
