@@ -523,7 +523,7 @@ Zugriff im Browser:
 
 Screenshot:
 
-![Ghost Frontend](images/ghost.png)
+![Ghost Frontend](Images/ghost.png)
 
 ---
 
