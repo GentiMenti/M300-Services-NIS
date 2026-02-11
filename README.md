@@ -17,13 +17,13 @@ Modul 300 von Gent Nishori
   - [Infrastructure as Code](#infrastructure-as-code)
     - [Was ist der Unterschied zur manuellen Installation einer VM?](#was-ist-der-unterschied-zur-manuellen-installation-einer-vm)
     - [Vagrant](#vagrant-1)
-  - [Was wird mit Vagrant erzeugt?](#was-wird-mit-vagrant-erzeugt)
-  - [Welche Aussagen treffen zu?](#welche-aussagen-treffen-zu)
-  - [In welchen Bereich des Cloud-Computings ist Vagrant einzuordnen?](#in-welchen-bereich-des-cloud-computings-ist-vagrant-einzuordnen)
-  - [Welche Alternativen zu Vagrant bestehen?](#welche-alternativen-zu-vagrant-bestehen)
-  - [Wo speichert Vagrant seine Konfiguration?](#wo-speichert-vagrant-seine-konfiguration)
-  - [Was bedeutet die Fehlermeldung](#was-bedeutet-die-fehlermeldung)
-    - [Bei welcher LPI-Zertifizierung nützt mir das Vagrant-Wissen?](#bei-welcher-lpi-zertifizierung-nützt-mir-das-vagrant-wissen)
+      - [Was wird mit Vagrant erzeugt?](#was-wird-mit-vagrant-erzeugt)
+      - [Welche Aussagen treffen zu?](#welche-aussagen-treffen-zu)
+      - [In welchen Bereich des Cloud-Computings ist Vagrant einzuordnen?](#in-welchen-bereich-des-cloud-computings-ist-vagrant-einzuordnen)
+      - [Welche Alternativen zu Vagrant bestehen?](#welche-alternativen-zu-vagrant-bestehen)
+      - [Wo speichert Vagrant seine Konfiguration?](#wo-speichert-vagrant-seine-konfiguration)
+      - [Was bedeutet die Fehlermeldung](#was-bedeutet-die-fehlermeldung)
+      - [Bei welcher LPI-Zertifizierung nützt mir das Vagrant-Wissen?](#bei-welcher-lpi-zertifizierung-nützt-mir-das-vagrant-wissen)
   - [LB2 – Neue VM erstellen und Umgebung vorbereiten](#lb2--neue-vm-erstellen-und-umgebung-vorbereiten)
     - [1) Neue VM erstellen](#1-neue-vm-erstellen)
 
@@ -99,8 +99,9 @@ sudo apt-get install -y apache2
 Der Webserver wurde erfolgreich getestet.
 Webzugriff vom Host
 Mittels Portweiterleitung im Vagrantfile wurde der Webserver vom Host-System erreichbar gemacht:
-
+```ruby 
 config.vm.network "forwarded_port", guest: 80, host: 8080
+```
 Der Zugriff erfolgte über:
 
 http://localhost:8080
@@ -144,39 +145,39 @@ Infrastructure as Code ermöglicht eine automatisierte, reproduzierbare und doku
 
 ### Vagrant
 
-## Was wird mit Vagrant erzeugt?
+#### Was wird mit Vagrant erzeugt?
 Mit Vagrant werden virtuelle Maschinen erstellt und verwaltet.
 
 ---
 
-## Welche Aussagen treffen zu?
+#### Welche Aussagen treffen zu?
 Richtig ist:  
 **b** Vagrant erzeugt virtuelle Maschinen und unterstützt verschiedene Hypervisoren und Cloud-Umgebungen.
 
 ---
 
-## In welchen Bereich des Cloud-Computings ist Vagrant einzuordnen?
+#### In welchen Bereich des Cloud-Computings ist Vagrant einzuordnen?
 Vagrant ist dem Bereich **Infrastructure as a Service (IaaS)** zuzuordnen.
 
 ---
 
-## Welche Alternativen zu Vagrant bestehen?
+#### Welche Alternativen zu Vagrant bestehen?
 Mögliche Alternativen sind z.B. Terraform, Docker, Packer oder direkte VirtualBox-Konfigurationen.
 
 ---
 
-## Wo speichert Vagrant seine Konfiguration?
+#### Wo speichert Vagrant seine Konfiguration?
 Die Konfiguration wird im **Vagrantfile** gespeichert.
 
 ---
 
-## Was bedeutet die Fehlermeldung  
+#### Was bedeutet die Fehlermeldung  
 „A Vagrant environment or target machine is required to run this command.“?
 Der Befehl wurde in einem Verzeichnis ausgeführt, in dem keine `Vagrantfile` vorhanden ist.
 
 ---
 
-### Bei welcher LPI-Zertifizierung nützt mir das Vagrant-Wissen?
+#### Bei welcher LPI-Zertifizierung nützt mir das Vagrant-Wissen?
 Das Wissen ist hilfreich für die **LPI DevOps Tools Engineer** Zertifizierung.
 
 ---
