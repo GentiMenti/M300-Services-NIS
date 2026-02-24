@@ -46,6 +46,19 @@ Modul 300 von Gent Nishori
     - [Wo darf ein SSH Tunnel nicht angewendet werden?](#wo-darf-ein-ssh-tunnel-nicht-angewendet-werden)
     - [Für was dient die Datei authorized\_keys?](#für-was-dient-die-datei-authorized_keys)
     - [Für was dient die Datei known\_hosts?](#für-was-dient-die-datei-known_hosts)
+  - [Integrationskonzept und Monitoring](#integrationskonzept-und-monitoring)
+  - [Integrationskonzept](#integrationskonzept)
+    - [Ziel](#ziel-1)
+    - [Systemarchitektur](#systemarchitektur)
+    - [Netzwerk-Integration](#netzwerk-integration)
+    - [Firewall-Konzept](#firewall-konzept)
+    - [Reverse Proxy Integration](#reverse-proxy-integration)
+  - [Monitoring](#monitoring)
+    - [Service-Überwachung](#service-überwachung)
+    - [Log-Überwachung](#log-überwachung)
+    - [Ressourcen-Überwachung](#ressourcen-überwachung)
+    - [Port-Überwachung](#port-überwachung)
+  - [Fazit](#fazit-1)
   - [Docker – Praktische Durchführung und Fehleranalyse](#docker--praktische-durchführung-und-fehleranalyse)
     - [Docker Installation testen](#docker-installation-testen)
     - [Interaktiven Ubuntu-Container starten](#interaktiven-ubuntu-container-starten)
@@ -330,6 +343,202 @@ Die Datei `authorized_keys` enthält die öffentlichen Schlüssel von Benutzern,
 
 Die Datei `known_hosts` speichert die öffentlichen Host-Schlüssel der Server, mit denen bereits eine SSH-Verbindung aufgebaut wurde.  
 Sie dient zur Verifikation der Server-Identität und schützt vor Man-in-the-Middle-Angriffen.
+
+
+## Integrationskonzept und Monitoring
+
+## Integrationskonzept
+
+### Ziel
+
+Ziel dieses Abschnitts ist es, den Apache-Webserver sicher in die bestehende Vagrant-Umgebung zu integrieren und den Betrieb nachvollziehbar zu dokumentieren.
+
+---
+
+### Systemarchitektur
+
+Die Integration erfolgt nach folgendem Prinzip:
+
+Client (Browser)  
+→ Host-System (Port Forwarding)  
+→ Vagrant VM  
+→ Apache Webserver  
+→ optional Backend-Service  
+
+Der Zugriff vom Host erfolgt über einen weitergeleiteten Port (z.B. 8081), welcher intern auf Port 80 der VM verweist.
+
+---
+
+### Netzwerk-Integration
+
+Portweiterleitung im `Vagrantfile`:
+
+```ruby
+config.vm.network "forwarded_port", guest: 80, host: 8081, auto_correct: true
+```
+
+Dadurch wird:
+
+- Host Port 8081
+- auf VM Port 80
+- weitergeleitet
+
+Zugriff erfolgt über:
+
+```
+http://localhost:8081
+```
+
+---
+
+### Firewall-Konzept
+
+Zur Absicherung der VM wurde UFW (Uncomplicated Firewall) eingesetzt.
+
+Standard-Regeln:
+
+```bash
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+```
+Firewall:
+
+![Ghost Frontend](Images/firewall.png)
+
+Bedeutung:
+
+- Eingehende Verbindungen werden blockiert
+- Ausgehende Verbindungen sind erlaubt
+
+Freigegebene Ports:
+
+```bash
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+```
+
+| Port | Zweck |
+|------|--------|
+| 22   | SSH Administration |
+| 80   | Webserver (Apache) |
+
+Alle anderen Ports bleiben geschlossen.
+
+---
+
+### Reverse Proxy Integration
+
+Apache kann als Reverse Proxy eingesetzt werden, um interne Dienste zu schützen.
+
+Aktivierte Module:
+
+```bash
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2enmod proxy_html
+```
+
+Beispiel-Konfiguration:
+
+```apache
+<VirtualHost *:80>
+    ServerName localhost
+
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:8080/
+    ProxyPassReverse / http://127.0.0.1:8080/
+
+    ErrorLog ${APACHE_LOG_DIR}/reverseproxy_error.log
+    CustomLog ${APACHE_LOG_DIR}/reverseproxy_access.log combined
+</VirtualHost>
+```
+
+Der Backend-Service ist dadurch nicht direkt erreichbar, sondern nur über den Reverse Proxy.
+
+---
+
+## Monitoring
+
+Ziel des Monitorings ist es, die Verfügbarkeit und Stabilität des Webservers im Betrieb sicherzustellen.
+
+---
+
+### Service-Überwachung
+
+Status prüfen:
+
+```bash
+sudo systemctl status apache2
+```
+
+Erwartetes Resultat:
+
+```
+active (running)
+```
+
+---
+
+### Log-Überwachung
+
+Error-Log prüfen:
+
+```bash
+sudo tail -f /var/log/apache2/error.log
+```
+
+Access-Log prüfen:
+
+```bash
+sudo tail -f /var/log/apache2/access.log
+```
+
+Damit können Fehler und Zugriffe nachvollzogen werden.
+
+---
+
+### Ressourcen-Überwachung
+
+CPU / RAM prüfen:
+
+```bash
+top
+```
+
+Speicherplatz prüfen:
+
+```bash
+df -h
+```
+
+Arbeitsspeicher prüfen:
+
+```bash
+free -m
+```
+
+---
+
+### Port-Überwachung
+
+Offene Ports anzeigen:
+
+```bash
+sudo ss -tulpn
+```
+
+Kontrolle:
+
+- Läuft Apache auf Port 80?
+- Sind nur erwartete Dienste aktiv?
+
+---
+
+## Fazit
+
+Durch das Integrationskonzept wird sichergestellt, dass der Webserver strukturiert und sicher in die Umgebung eingebunden ist.
+
+Das Monitoring gewährleistet einen stabilen und kontrollierten Betrieb im laufenden System.
 
 
 ## Docker – Praktische Durchführung und Fehleranalyse
