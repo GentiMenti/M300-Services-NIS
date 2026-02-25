@@ -5,76 +5,124 @@ Modul 300 von Gent Nishori
 <!-- TOC -->
 
 - [M300-Services-NIS](#m300-services-nis)
-    - [Inhaltsverzeichnis](#inhaltsverzeichnis)
+  - [Inhaltsverzeichnis](#inhaltsverzeichnis)
 - [M300 – Toolumgebung einrichten](#m300--toolumgebung-einrichten)
-    - [Ziel](#ziel)
-    - [Verwendete Tools](#verwendete-tools)
-    - [Einrichtung der Toolumgebung](#einrichtung-der-toolumgebung)
-        - [Git & GitHub](#git--github)
-        - [VirtualBox](#virtualbox)
-        - [Vagrant](#vagrant)
-        - [Probleme und Lösungen](#probleme-und-l%C3%B6sungen)
-        - [Apache Webserver](#apache-webserver)
-        - [Fazit](#fazit)
-- [M300 – Fragen & Antworten](#m300--fragen--antworten)
-    - [Cloud Computing](#cloud-computing)
-        - [Was versteht man unter Cloud-Computing?](#was-versteht-man-unter-cloud-computing)
-        - [Was versteht man unter Infrastructure as a Service IaaS?](#was-versteht-man-unter-infrastructure-as-a-service-iaas)
-    - [Infrastructure as Code](#infrastructure-as-code)
-        - [Was ist der Unterschied zur manuellen Installation einer VM?](#was-ist-der-unterschied-zur-manuellen-installation-einer-vm)
-        - [Vagrant](#vagrant)
-            - [Was wird mit Vagrant erzeugt?](#was-wird-mit-vagrant-erzeugt)
-            - [Welche Aussagen treffen zu?](#welche-aussagen-treffen-zu)
-            - [In welchen Bereich des Cloud-Computings ist Vagrant einzuordnen?](#in-welchen-bereich-des-cloud-computings-ist-vagrant-einzuordnen)
-            - [Welche Alternativen zu Vagrant bestehen?](#welche-alternativen-zu-vagrant-bestehen)
-            - [Wo speichert Vagrant seine Konfiguration?](#wo-speichert-vagrant-seine-konfiguration)
-            - [Was bedeutet die Fehlermeldung](#was-bedeutet-die-fehlermeldung)
-            - [Bei welcher LPI-Zertifizierung nützt mir das Vagrant-Wissen?](#bei-welcher-lpi-zertifizierung-n%C3%BCtzt-mir-das-vagrant-wissen)
-    - [LB2 – Neue VM erstellen und Umgebung vorbereiten](#lb2--neue-vm-erstellen-und-umgebung-vorbereiten)
-        - [Neue VM erstellen](#neue-vm-erstellen)
-        - [Verbindung zur VM SSH](#verbindung-zur-vm-ssh)
-        - [Webserver vom Host erreichbar machen Port Forwarding](#webserver-vom-host-erreichbar-machen-port-forwarding)
-        - [Portweiterleitung aktivieren](#portweiterleitung-aktivieren)
-        - [Zugriffstest im Browser](#zugriffstest-im-browser)
-- [Fragen 25 – Sicherheit](#fragen-25--sicherheit)
-    - [Firewall und Reverse Proxy](#firewall-und-reverse-proxy)
-        - [Was ist der Unterschied zwischen einem Web Server und einem Reverse Proxy?](#was-ist-der-unterschied-zwischen-einem-web-server-und-einem-reverse-proxy)
-        - [Was verstehen wir unter einer "White List"?](#was-verstehen-wir-unter-einer-white-list)
-        - [Was wäre die Alternative zum Absichern der einzelnen Server mit einer Firewall?](#was-w%C3%A4re-die-alternative-zum-absichern-der-einzelnen-server-mit-einer-firewall)
-    - [SSH](#ssh)
-        - [Was ist der Unterschied zwischen der id_rsa und id_rsa.pub Datei?](#was-ist-der-unterschied-zwischen-der-id_rsa-und-id_rsapub-datei)
-        - [Wo darf ein SSH Tunnel nicht angewendet werden?](#wo-darf-ein-ssh-tunnel-nicht-angewendet-werden)
-        - [Für was dient die Datei authorized_keys?](#f%C3%BCr-was-dient-die-datei-authorized_keys)
-        - [Für was dient die Datei known_hosts?](#f%C3%BCr-was-dient-die-datei-known_hosts)
-    - [Integrationskonzept und Monitoring](#integrationskonzept-und-monitoring)
-    - [Integrationskonzept](#integrationskonzept)
-        - [Ziel](#ziel)
-        - [Systemarchitektur](#systemarchitektur)
-        - [Netzwerk-Integration](#netzwerk-integration)
-        - [Firewall-Konzept](#firewall-konzept)
-        - [Reverse Proxy Integration](#reverse-proxy-integration)
-    - [Monitoring](#monitoring)
-        - [Service-Überwachung](#service-%C3%9Cberwachung)
-        - [Log-Überwachung](#log-%C3%9Cberwachung)
-        - [Ressourcen-Überwachung](#ressourcen-%C3%9Cberwachung)
-        - [Port-Überwachung](#port-%C3%9Cberwachung)
+  - [Ziel](#ziel)
+  - [Verwendete Tools](#verwendete-tools)
+  - [Einrichtung der Toolumgebung](#einrichtung-der-toolumgebung)
+    - [Git \& GitHub](#git--github)
+    - [VirtualBox](#virtualbox)
+    - [Vagrant](#vagrant)
+    - [Probleme und Lösungen](#probleme-und-lösungen)
+    - [Apache Webserver](#apache-webserver)
     - [Fazit](#fazit)
-    - [Docker – Praktische Durchführung und Fehleranalyse](#docker--praktische-durchf%C3%BChrung-und-fehleranalyse)
-        - [Docker Installation testen](#docker-installation-testen)
-        - [Interaktiven Ubuntu-Container starten](#interaktiven-ubuntu-container-starten)
-        - [Hintergrund-Container starten](#hintergrund-container-starten)
-        - [Fehler: Falscher Parameter beim Build](#fehler-falscher-parameter-beim-build)
-        - [Fehler: Dockerfile nicht gefunden](#fehler-dockerfile-nicht-gefunden)
-        - [Fehler: Dockerfile leer](#fehler-dockerfile-leer)
-    - [Webalizer Statistik](#webalizer-statistik)
-        - [Docker Netzwerke anzeigen](#docker-netzwerke-anzeigen)
-    - [LB3 – Hands-on Docker](#lb3--hands-on-docker)
-        - [Netzwerk für LB3 erstellen](#netzwerk-f%C3%BCr-lb3-erstellen)
-        - [MySQL Backend starten](#mysql-backend-starten)
-        - [Ghost Frontend starten](#ghost-frontend-starten)
-        - [Eigenes Docker Image erstellen Apache](#eigenes-docker-image-erstellen-apache)
-        - [Problem: Container-Name bereits vergeben](#problem-container-name-bereits-vergeben)
-        - [Status prüfen laufende Container](#status-pr%C3%BCfen-laufende-container)
+- [M300 – Fragen \& Antworten](#m300--fragen--antworten)
+  - [Cloud Computing](#cloud-computing)
+    - [Was versteht man unter Cloud-Computing?](#was-versteht-man-unter-cloud-computing)
+    - [Was versteht man unter Infrastructure as a Service (IaaS)?](#was-versteht-man-unter-infrastructure-as-a-service-iaas)
+  - [Infrastructure as Code](#infrastructure-as-code)
+    - [Was ist der Unterschied zur manuellen Installation einer VM?](#was-ist-der-unterschied-zur-manuellen-installation-einer-vm)
+    - [Vagrant](#vagrant-1)
+      - [Was wird mit Vagrant erzeugt?](#was-wird-mit-vagrant-erzeugt)
+      - [Welche Aussagen treffen zu?](#welche-aussagen-treffen-zu)
+      - [In welchen Bereich des Cloud-Computings ist Vagrant einzuordnen?](#in-welchen-bereich-des-cloud-computings-ist-vagrant-einzuordnen)
+      - [Welche Alternativen zu Vagrant bestehen?](#welche-alternativen-zu-vagrant-bestehen)
+      - [Wo speichert Vagrant seine Konfiguration?](#wo-speichert-vagrant-seine-konfiguration)
+      - [Was bedeutet die Fehlermeldung](#was-bedeutet-die-fehlermeldung)
+      - [Bei welcher LPI-Zertifizierung nützt mir das Vagrant-Wissen?](#bei-welcher-lpi-zertifizierung-nützt-mir-das-vagrant-wissen)
+  - [LB2 – Neue VM erstellen und Umgebung vorbereiten](#lb2--neue-vm-erstellen-und-umgebung-vorbereiten)
+    - [1) Neue VM erstellen](#1-neue-vm-erstellen)
+    - [Verbindung zur VM (SSH)](#verbindung-zur-vm-ssh)
+    - [Webserver vom Host erreichbar machen (Port Forwarding)](#webserver-vom-host-erreichbar-machen-port-forwarding)
+    - [Portweiterleitung aktivieren](#portweiterleitung-aktivieren)
+    - [Zugriffstest im Browser](#zugriffstest-im-browser)
+- [Fragen 25 – Sicherheit](#fragen-25--sicherheit)
+  - [Firewall und Reverse Proxy](#firewall-und-reverse-proxy)
+    - [Was ist der Unterschied zwischen einem Web Server und einem Reverse Proxy?](#was-ist-der-unterschied-zwischen-einem-web-server-und-einem-reverse-proxy)
+    - [Was verstehen wir unter einer "White List"?](#was-verstehen-wir-unter-einer-white-list)
+    - [Was wäre die Alternative zum Absichern der einzelnen Server mit einer Firewall?](#was-wäre-die-alternative-zum-absichern-der-einzelnen-server-mit-einer-firewall)
+  - [SSH](#ssh)
+    - [Was ist der Unterschied zwischen der id\_rsa und id\_rsa.pub Datei?](#was-ist-der-unterschied-zwischen-der-id_rsa-und-id_rsapub-datei)
+    - [Wo darf ein SSH Tunnel nicht angewendet werden?](#wo-darf-ein-ssh-tunnel-nicht-angewendet-werden)
+    - [Für was dient die Datei authorized\_keys?](#für-was-dient-die-datei-authorized_keys)
+    - [Für was dient die Datei known\_hosts?](#für-was-dient-die-datei-known_hosts)
+  - [Integrationskonzept und Monitoring](#integrationskonzept-und-monitoring)
+  - [Integrationskonzept](#integrationskonzept)
+    - [Ziel](#ziel-1)
+    - [Systemarchitektur](#systemarchitektur)
+    - [Netzwerk-Integration](#netzwerk-integration)
+    - [Firewall-Konzept](#firewall-konzept)
+    - [Reverse Proxy Integration](#reverse-proxy-integration)
+  - [Monitoring](#monitoring)
+    - [Service-Überwachung](#service-überwachung)
+    - [Log-Überwachung](#log-überwachung)
+    - [Ressourcen-Überwachung](#ressourcen-überwachung)
+    - [Port-Überwachung](#port-überwachung)
+  - [Fazit](#fazit-1)
+  - [Docker – Praktische Durchführung und Fehleranalyse](#docker--praktische-durchführung-und-fehleranalyse)
+    - [Docker Installation testen](#docker-installation-testen)
+    - [Interaktiven Ubuntu-Container starten](#interaktiven-ubuntu-container-starten)
+    - [Hintergrund-Container starten](#hintergrund-container-starten)
+    - [Fehler: Falscher Parameter beim Build](#fehler-falscher-parameter-beim-build)
+    - [Fehler: Dockerfile nicht gefunden](#fehler-dockerfile-nicht-gefunden)
+    - [Fehler: Dockerfile leer](#fehler-dockerfile-leer)
+  - [](#)
+    - [Docker Netzwerke anzeigen](#docker-netzwerke-anzeigen)
+  - [LB3 – Hands-on (Docker)](#lb3--hands-on-docker)
+    - [Netzwerk für LB3 erstellen](#netzwerk-für-lb3-erstellen)
+    - [MySQL (Backend) starten](#mysql-backend-starten)
+    - [Ghost (Frontend) starten](#ghost-frontend-starten)
+    - [Eigenes Docker Image erstellen (Apache)](#eigenes-docker-image-erstellen-apache)
+    - [Problem: Container-Name bereits vergeben](#problem-container-name-bereits-vergeben)
+    - [Status prüfen (laufende Container)](#status-prüfen-laufende-container)
+- [35 – Sicherheit](#35--sicherheit)
+  - [Fragen \& Antworten](#fragen--antworten)
+  - [Protokollieren \& Überwachen](#protokollieren--überwachen)
+    - [Warum sollten Container überwacht werden?](#warum-sollten-container-überwacht-werden)
+    - [Was ist das syslog und wo ist es zu finden?](#was-ist-das-syslog-und-wo-ist-es-zu-finden)
+    - [Was ist stdout, stderr, stdin?](#was-ist-stdout-stderr-stdin)
+  - [Container sichern \& beschränken](#container-sichern--beschränken)
+    - [Wie kann `docker run -v /:/homeroot -it ubuntu bash` durch normale User verhindert werden?](#wie-kann-docker-run--v-homeroot--it-ubuntu-bash-durch-normale-user-verhindert-werden)
+    - [Wie können verschiedene Mandanten getrennt werden?](#wie-können-verschiedene-mandanten-getrennt-werden)
+    - [Wie kann der Ressourcenverbrauch von Containern eingeschränkt werden?](#wie-kann-der-ressourcenverbrauch-von-containern-eingeschränkt-werden)
+  - [Kontinuierliche Integration (CI)](#kontinuierliche-integration-ci)
+    - [Welche Funktionen kann Jenkins übernehmen?](#welche-funktionen-kann-jenkins-übernehmen)
+    - [Wie baut man Modultests?](#wie-baut-man-modultests)
+    - [Wie können Jenkins Jobs ausser manuell oder zeitgesteuert gestartet werden?](#wie-können-jenkins-jobs-ausser-manuell-oder-zeitgesteuert-gestartet-werden)
+- [Secure Docker Container – Fehleranalyse \& Härtung](#secure-docker-container--fehleranalyse--härtung)
+  - [1. Image Build](#1-image-build)
+  - [2. Fehler 1 – Falscher Image-Name](#2-fehler-1--falscher-image-name)
+    - [Fehler:](#fehler)
+    - [Ursache:](#ursache)
+    - [Lösung:](#lösung)
+  - [3. Fehler 2 – Port bereits blockiert](#3-fehler-2--port-bereits-blockiert)
+    - [Fehler:](#fehler-1)
+    - [Ursache:](#ursache-1)
+    - [Lösung:](#lösung-1)
+  - [4. Fehler 3 – Container Name bereits vergeben](#4-fehler-3--container-name-bereits-vergeben)
+    - [Fehler:](#fehler-2)
+    - [Ursache:](#ursache-2)
+    - [Lösung:](#lösung-2)
+  - [5. Sicherheits-Härtung mit docker run](#5-sicherheits-härtung-mit-docker-run)
+    - [Bedeutung der Parameter](#bedeutung-der-parameter)
+  - [6. Fehler 4 – Read-only Filesystem](#6-fehler-4--read-only-filesystem)
+    - [Log:](#log)
+    - [Ursache:](#ursache-3)
+    - [Lösung:](#lösung-3)
+  - [7. Fehler 5 – Permission denied](#7-fehler-5--permission-denied)
+    - [Log:](#log-1)
+    - [Ursache:](#ursache-4)
+    - [Lösung:](#lösung-4)
+  - [8. Fehler 6 – chown Operation not permitted](#8-fehler-6--chown-operation-not-permitted)
+    - [Log:](#log-2)
+    - [Ursache:](#ursache-5)
+  - [9. Analyse](#9-analyse)
+  - [10. Fazit (Container Security Learning)](#10-fazit-container-security-learning)
+    - [Sicherheit wurde verbessert durch:](#sicherheit-wurde-verbessert-durch)
+    - [Problem:](#problem)
+  - [11. Erkenntnisse für LB 3 / 35-Sicherheit](#11-erkenntnisse-für-lb-3--35-sicherheit)
+  - [12. Test-Kommandos](#12-test-kommandos)
+- [Endergebnis](#endergebnis)
 
 <!-- /TOC -->
 
@@ -793,4 +841,377 @@ Beim Apache-Container war Healthcheck aktiv (Status z.B. `health: starting`).
 
 ---
 
+# 35 – Sicherheit  
+## Fragen & Antworten
 
+---
+
+## Protokollieren & Überwachen
+
+### Warum sollten Container überwacht werden?
+
+Container sollten überwacht werden, um Fehler, Abstürze oder ungewöhnlich hohe Ressourcenbelastungen (CPU, RAM, Storage) frühzeitig zu erkennen und rechtzeitig eingreifen zu können.
+
+---
+
+### Was ist das syslog und wo ist es zu finden?
+
+**Syslog** ist das zentrale Log-System eines Linux-Hosts.  
+Es sammelt System- und Dienstmeldungen.
+
+Zu finden unter:
+
+```
+/var/log/
+```
+
+Beispiel:
+```
+/var/log/syslog
+```
+
+---
+
+### Was ist stdout, stderr, stdin?
+
+- **stdin** → Standard Input (Eingabe)  
+- **stdout** → Standard Output (normale Ausgabe)  
+- **stderr** → Standard Error (Fehlerausgabe)
+
+Diese drei Standard-Datenströme werden auch von Docker-Containern verwendet.
+
+---
+
+## Container sichern & beschränken
+
+### Wie kann `docker run -v /:/homeroot -it ubuntu bash` durch normale User verhindert werden?
+
+Indem nur Benutzer mit Root-Rechten oder Mitglieder der **docker-Gruppe** Container starten dürfen.
+
+Normale Benutzer ohne entsprechende Berechtigung dürfen keine Container starten.
+
+---
+
+### Wie können verschiedene Mandanten getrennt werden?
+
+Durch die Nutzung von:
+
+- Virtuellen Maschinen (VMs)
+- Getrennten Netzwerken
+- Namespace-Isolation in Containern
+
+Am sichersten erfolgt die Trennung über separate VMs.
+
+---
+
+### Wie kann der Ressourcenverbrauch von Containern eingeschränkt werden?
+
+Durch Limits beim Start eines Containers:
+
+```bash
+docker run --memory="512m" --cpus="1.0" ubuntu
+```
+
+Weitere Möglichkeiten:
+- CPU-Limits
+- RAM-Limits
+- I/O-Limits
+- PIDs-Limit
+
+Dokumentation:
+https://docs.docker.com/config/containers/resource_constraints/
+
+---
+
+## Kontinuierliche Integration (CI)
+
+### Welche Funktionen kann Jenkins übernehmen?
+
+Jenkins kann:
+
+- Continuous Integration (CI)
+- Modultests ausführen
+- Software bauen (Build-Prozess)
+- Automatisierte Deployments
+- Batch-Jobs ausführen (z.B. Log-Überprüfung)
+
+---
+
+### Wie baut man Modultests?
+
+Modultests können erstellt werden mit:
+
+- Bash-Skripten
+- Test-Frameworks (z.B. JUnit, pytest)
+- Automatisierten Testskripten im CI-Prozess
+
+---
+
+### Wie können Jenkins Jobs ausser manuell oder zeitgesteuert gestartet werden?
+
+Jenkins Jobs können automatisch gestartet werden durch:
+
+- Änderungen in einem Git Repository (Webhook)
+- Pull Requests
+- Commit Push Events
+- API Trigger
+
+# Secure Docker Container – Fehleranalyse & Härtung
+
+## 1. Image Build
+
+```powershell
+docker build -t secure-docker .
+```
+
+Build erfolgreich:
+- Base Image: nginx:alpine
+- User hinzugefügt: appuser
+- Test HTML erstellt
+- Image: secure-docker:latest
+
+Dockerfile:
+```ruby
+
+FROM nginx:alpine
+
+# Non-root user erstellen
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# Test HTML Seite
+RUN echo "<h1>Secure Container Running</h1>" > /usr/share/nginx/html/index.html
+
+# Healthcheck einbauen
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+  CMD wget -q --spider http://localhost/ || exit 1
+
+# User wechseln
+USER appuser
+
+EXPOSE 80
+
+```
+
+---
+
+## 2. Fehler 1 – Falscher Image-Name
+
+```powershell
+docker run ... docker-secure
+```
+
+### Fehler:
+```
+pull access denied for docker-secure
+```
+
+### Ursache:
+Image heisst **secure-docker**, nicht docker-secure.
+
+### Lösung:
+```powershell
+docker run ... secure-docker
+```
+
+---
+
+## 3. Fehler 2 – Port bereits blockiert
+
+```powershell
+-p 8090:80
+```
+
+### Fehler:
+```
+bind: An attempt was made to access a socket in a way forbidden by its access permissions
+```
+
+### Ursache:
+Port 8090 war bereits belegt oder blockiert.
+
+### Lösung:
+Anderen Port verwenden:
+
+```powershell
+-p 8091:80
+```
+
+---
+
+## 4. Fehler 3 – Container Name bereits vergeben
+
+### Fehler:
+```
+Conflict. The container name "/secure-demo" is already in use
+```
+
+### Ursache:
+Container existiert bereits.
+
+### Lösung:
+```powersshell
+docker rm -f secure-demo
+```
+
+---
+
+## 5. Sicherheits-Härtung mit docker run
+
+Verwendete Security-Parameter:
+
+```powershell
+docker run -d --name secure-demo `
+  --memory="256m" `
+  --cpus="0.5" `
+  --pids-limit=100 `
+  --read-only `
+  --tmpfs /tmp `
+  --cap-drop=ALL `
+  --security-opt=no-new-privileges `
+  -p 8091:80 `
+  secure-docker
+```
+
+### Bedeutung der Parameter
+
+| Option | Zweck |
+|--------|-------|
+| --memory | RAM Limit |
+| --cpus | CPU Limit |
+| --pids-limit | Prozesslimit |
+| --read-only | Root Filesystem readonly |
+| --tmpfs | Schreibbare temporäre Verzeichnisse |
+| --cap-drop=ALL | Entfernt Linux Capabilities |
+| --security-opt=no-new-privileges | Keine Privilege Escalation |
+
+---
+
+## 6. Fehler 4 – Read-only Filesystem
+
+### Log:
+```
+mkdir() "/var/cache/nginx/client_temp" failed (30: Read-only file system)
+```
+
+### Ursache:
+nginx versucht Cache-Verzeichnisse zu erstellen,
+aber Root-Filesystem ist readonly.
+
+### Lösung:
+Zusätzliche tmpfs Mounts:
+
+```powershell
+--tmpfs /var/cache/nginx
+--tmpfs /var/run
+```
+
+---
+
+## 7. Fehler 5 – Permission denied
+
+### Log:
+```
+mkdir() "/var/cache/nginx/client_temp" failed (13: Permission denied)
+```
+
+### Ursache:
+nginx läuft als User 101,
+tmpfs gehört aber root.
+
+### Lösung:
+UID/GID setzen:
+
+```powershell
+--tmpfs /tmp:uid=101,gid=101,mode=1777 `
+--tmpfs /var/cache/nginx:uid=101,gid=101,mode=755 `
+--tmpfs /var/run:uid=101,gid=101,mode=755
+```
+
+---
+
+## 8. Fehler 6 – chown Operation not permitted
+
+### Log:
+```
+chown("/var/cache/nginx/client_temp", 101) failed (1: Operation not permitted)
+```
+
+### Ursache:
+`--cap-drop=ALL` entfernt notwendige Capabilities.
+nginx EntryPoint versucht `chown`.
+
+Da Capabilities entfernt wurden,
+darf der Prozess keine Ownership ändern.
+
+---
+
+## 9. Analyse
+
+Das nginx Standard-Entrypoint-Skript:
+- führt Konfigurationsskripte aus
+- versucht Dateien zu modifizieren
+- benötigt root-Rechte oder Capabilities
+
+Mit:
+- `--read-only`
+- `--cap-drop=ALL`
+- `--no-new-privileges`
+
+wird dies blockiert.
+
+---
+
+## 10. Fazit (Container Security Learning)
+
+### Sicherheit wurde verbessert durch:
+
+- Ressourcen-Limits
+- Read-only Filesystem
+- Entfernen aller Linux Capabilities
+- Verhindern von Privilege Escalation
+
+### Problem:
+
+Standard nginx Image ist nicht für extreme Hardening-Flags ausgelegt.
+
+Für echte Produktions-Härtung müsste man:
+
+- Eigenes nginx.conf verwenden
+- EntryPoint anpassen
+- nginx direkt als non-root starten
+- Keine chown Operationen erlauben
+
+---
+
+## 11. Erkenntnisse für LB 3 / 35-Sicherheit
+
+Dieses Beispiel zeigt:
+
+- Warum Container überwacht werden müssen
+- Wie Ressourcen beschränkt werden
+- Wie Capabilities funktionieren
+- Warum Root im Container problematisch ist
+- Wie Read-only Filesystem Sicherheit erhöht
+- Welche Probleme dabei entstehen können
+
+---
+
+## 12. Test-Kommandos
+
+```powershell
+docker ps
+docker logs secure-demo
+docker rm -f secure-demo
+docker stats
+```
+
+---
+
+# Endergebnis
+
+Container wurde mehrfach mit verschiedenen Security-Konfigurationen getestet.
+Fehler analysiert.
+Ursachen verstanden.
+Lösungen dokumentiert.
+
+Ziel: Verständnis von Container-Härtung erreicht.
