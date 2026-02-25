@@ -10,119 +10,73 @@ Modul 300 von Gent Nishori
   - [Ziel](#ziel)
   - [Verwendete Tools](#verwendete-tools)
   - [Einrichtung der Toolumgebung](#einrichtung-der-toolumgebung)
-    - [Git \& GitHub](#git--github)
-    - [VirtualBox](#virtualbox)
-    - [Vagrant](#vagrant)
-    - [Probleme und Lösungen](#probleme-und-lösungen)
-    - [Apache Webserver](#apache-webserver)
-    - [Fazit](#fazit)
 - [M300 – Fragen \& Antworten](#m300--fragen--antworten)
   - [Cloud Computing](#cloud-computing)
-    - [Was versteht man unter Cloud-Computing?](#was-versteht-man-unter-cloud-computing)
-    - [Was versteht man unter Infrastructure as a Service (IaaS)?](#was-versteht-man-unter-infrastructure-as-a-service-iaas)
   - [Infrastructure as Code](#infrastructure-as-code)
-    - [Was ist der Unterschied zur manuellen Installation einer VM?](#was-ist-der-unterschied-zur-manuellen-installation-einer-vm)
-    - [Vagrant](#vagrant-1)
-      - [Was wird mit Vagrant erzeugt?](#was-wird-mit-vagrant-erzeugt)
-      - [Welche Aussagen treffen zu?](#welche-aussagen-treffen-zu)
-      - [In welchen Bereich des Cloud-Computings ist Vagrant einzuordnen?](#in-welchen-bereich-des-cloud-computings-ist-vagrant-einzuordnen)
-      - [Welche Alternativen zu Vagrant bestehen?](#welche-alternativen-zu-vagrant-bestehen)
-      - [Wo speichert Vagrant seine Konfiguration?](#wo-speichert-vagrant-seine-konfiguration)
-      - [Was bedeutet die Fehlermeldung](#was-bedeutet-die-fehlermeldung)
-      - [Bei welcher LPI-Zertifizierung nützt mir das Vagrant-Wissen?](#bei-welcher-lpi-zertifizierung-nützt-mir-das-vagrant-wissen)
   - [LB2 – Neue VM erstellen und Umgebung vorbereiten](#lb2--neue-vm-erstellen-und-umgebung-vorbereiten)
-    - [1) Neue VM erstellen](#1-neue-vm-erstellen)
-    - [Verbindung zur VM (SSH)](#verbindung-zur-vm-ssh)
-    - [Webserver vom Host erreichbar machen (Port Forwarding)](#webserver-vom-host-erreichbar-machen-port-forwarding)
-    - [Portweiterleitung aktivieren](#portweiterleitung-aktivieren)
-    - [Zugriffstest im Browser](#zugriffstest-im-browser)
 - [Fragen 25 – Sicherheit](#fragen-25--sicherheit)
   - [Firewall und Reverse Proxy](#firewall-und-reverse-proxy)
-    - [Was ist der Unterschied zwischen einem Web Server und einem Reverse Proxy?](#was-ist-der-unterschied-zwischen-einem-web-server-und-einem-reverse-proxy)
-    - [Was verstehen wir unter einer "White List"?](#was-verstehen-wir-unter-einer-white-list)
-    - [Was wäre die Alternative zum Absichern der einzelnen Server mit einer Firewall?](#was-wäre-die-alternative-zum-absichern-der-einzelnen-server-mit-einer-firewall)
   - [SSH](#ssh)
-    - [Was ist der Unterschied zwischen der id\_rsa und id\_rsa.pub Datei?](#was-ist-der-unterschied-zwischen-der-id_rsa-und-id_rsapub-datei)
-    - [Wo darf ein SSH Tunnel nicht angewendet werden?](#wo-darf-ein-ssh-tunnel-nicht-angewendet-werden)
-    - [Für was dient die Datei authorized\_keys?](#für-was-dient-die-datei-authorized_keys)
-    - [Für was dient die Datei known\_hosts?](#für-was-dient-die-datei-known_hosts)
   - [Integrationskonzept und Monitoring](#integrationskonzept-und-monitoring)
   - [Integrationskonzept](#integrationskonzept)
-    - [Ziel](#ziel-1)
-    - [Systemarchitektur](#systemarchitektur)
-    - [Netzwerk-Integration](#netzwerk-integration)
-    - [Firewall-Konzept](#firewall-konzept)
-    - [Reverse Proxy Integration](#reverse-proxy-integration)
   - [Monitoring](#monitoring)
-    - [Service-Überwachung](#service-überwachung)
-    - [Log-Überwachung](#log-überwachung)
-    - [Ressourcen-Überwachung](#ressourcen-überwachung)
-    - [Port-Überwachung](#port-überwachung)
   - [Fazit](#fazit-1)
   - [Docker – Praktische Durchführung und Fehleranalyse](#docker--praktische-durchführung-und-fehleranalyse)
-    - [Docker Installation testen](#docker-installation-testen)
-    - [Interaktiven Ubuntu-Container starten](#interaktiven-ubuntu-container-starten)
-    - [Hintergrund-Container starten](#hintergrund-container-starten)
-    - [Fehler: Falscher Parameter beim Build](#fehler-falscher-parameter-beim-build)
-    - [Fehler: Dockerfile nicht gefunden](#fehler-dockerfile-nicht-gefunden)
-    - [Fehler: Dockerfile leer](#fehler-dockerfile-leer)
   - [](#)
-    - [Docker Netzwerke anzeigen](#docker-netzwerke-anzeigen)
   - [LB3 – Hands-on (Docker)](#lb3--hands-on-docker)
-    - [Netzwerk für LB3 erstellen](#netzwerk-für-lb3-erstellen)
-    - [MySQL (Backend) starten](#mysql-backend-starten)
-    - [Ghost (Frontend) starten](#ghost-frontend-starten)
-    - [Eigenes Docker Image erstellen (Apache)](#eigenes-docker-image-erstellen-apache)
-    - [Problem: Container-Name bereits vergeben](#problem-container-name-bereits-vergeben)
-    - [Status prüfen (laufende Container)](#status-prüfen-laufende-container)
 - [35 – Sicherheit](#35--sicherheit)
   - [Fragen \& Antworten](#fragen--antworten)
   - [Protokollieren \& Überwachen](#protokollieren--überwachen)
-    - [Warum sollten Container überwacht werden?](#warum-sollten-container-überwacht-werden)
-    - [Was ist das syslog und wo ist es zu finden?](#was-ist-das-syslog-und-wo-ist-es-zu-finden)
-    - [Was ist stdout, stderr, stdin?](#was-ist-stdout-stderr-stdin)
   - [Container sichern \& beschränken](#container-sichern--beschränken)
-    - [Wie kann `docker run -v /:/homeroot -it ubuntu bash` durch normale User verhindert werden?](#wie-kann-docker-run--v-homeroot--it-ubuntu-bash-durch-normale-user-verhindert-werden)
-    - [Wie können verschiedene Mandanten getrennt werden?](#wie-können-verschiedene-mandanten-getrennt-werden)
-    - [Wie kann der Ressourcenverbrauch von Containern eingeschränkt werden?](#wie-kann-der-ressourcenverbrauch-von-containern-eingeschränkt-werden)
   - [Kontinuierliche Integration (CI)](#kontinuierliche-integration-ci)
-    - [Welche Funktionen kann Jenkins übernehmen?](#welche-funktionen-kann-jenkins-übernehmen)
-    - [Wie baut man Modultests?](#wie-baut-man-modultests)
-    - [Wie können Jenkins Jobs ausser manuell oder zeitgesteuert gestartet werden?](#wie-können-jenkins-jobs-ausser-manuell-oder-zeitgesteuert-gestartet-werden)
 - [Secure Docker Container – Fehleranalyse \& Härtung](#secure-docker-container--fehleranalyse--härtung)
   - [1. Image Build](#1-image-build)
   - [2. Fehler 1 – Falscher Image-Name](#2-fehler-1--falscher-image-name)
-    - [Fehler:](#fehler)
-    - [Ursache:](#ursache)
-    - [Lösung:](#lösung)
   - [3. Fehler 2 – Port bereits blockiert](#3-fehler-2--port-bereits-blockiert)
-    - [Fehler:](#fehler-1)
-    - [Ursache:](#ursache-1)
-    - [Lösung:](#lösung-1)
   - [4. Fehler 3 – Container Name bereits vergeben](#4-fehler-3--container-name-bereits-vergeben)
-    - [Fehler:](#fehler-2)
-    - [Ursache:](#ursache-2)
-    - [Lösung:](#lösung-2)
   - [5. Sicherheits-Härtung mit docker run](#5-sicherheits-härtung-mit-docker-run)
-    - [Bedeutung der Parameter](#bedeutung-der-parameter)
   - [6. Fehler 4 – Read-only Filesystem](#6-fehler-4--read-only-filesystem)
-    - [Log:](#log)
-    - [Ursache:](#ursache-3)
-    - [Lösung:](#lösung-3)
   - [7. Fehler 5 – Permission denied](#7-fehler-5--permission-denied)
-    - [Log:](#log-1)
-    - [Ursache:](#ursache-4)
-    - [Lösung:](#lösung-4)
   - [8. Fehler 6 – chown Operation not permitted](#8-fehler-6--chown-operation-not-permitted)
-    - [Log:](#log-2)
-    - [Ursache:](#ursache-5)
   - [9. Analyse](#9-analyse)
   - [10. Fazit (Container Security Learning)](#10-fazit-container-security-learning)
-    - [Sicherheit wurde verbessert durch:](#sicherheit-wurde-verbessert-durch)
-    - [Problem:](#problem)
   - [11. Erkenntnisse für LB 3 / 35-Sicherheit](#11-erkenntnisse-für-lb-3--35-sicherheit)
   - [12. Test-Kommandos](#12-test-kommandos)
 - [Endergebnis](#endergebnis)
+- [40 – Jenkins Blue Ocean Dokumentation](#40--jenkins-blue-ocean-dokumentation)
+  - [1. Blue Ocean Container starten](#1-blue-ocean-container-starten)
+  - [2. Port-Problem](#2-port-problem)
+  - [3. Initial Setup](#3-initial-setup)
+  - [4. Admin User erstellen](#4-admin-user-erstellen)
+  - [5. Plugin-Installationsproblem](#5-plugin-installationsproblem)
+  - [6. Safe Restart](#6-safe-restart)
+  - [7. Ergebnis](#7-ergebnis)
+  - [8. Fazit](#8-fazit)
+- [40 – Kubernetes (K8s) Dokumentation](#40--kubernetes-k8s-dokumentation)
+  - [Lernziel](#lernziel)
+- [01 – Grundbegriffe](#01--grundbegriffe)
+  - [Service Discovery](#service-discovery)
+  - [Load Balancing](#load-balancing)
+  - [Cluster](#cluster)
+- [02 – Kubernetes](#02--kubernetes)
+  - [Wichtige Objekte](#wichtige-objekte)
+- [03 – Beispiel: Eigene Installation \& Aufsetzung](#03--beispiel-eigene-installation--aufsetzung)
+  - [Variante: Kubernetes mit Vagrant (Projekt lernkube)](#variante-kubernetes-mit-vagrant-projekt-lernkube)
+  - [Schritt 1 – Repository klonen](#schritt-1--repository-klonen)
+  - [Schritt 2 – Cluster starten](#schritt-2--cluster-starten)
+  - [Schritt 3 – Zugriff auf kubectl aktivieren (Windows)](#schritt-3--zugriff-auf-kubectl-aktivieren-windows)
+- [04 – Hands-On: Apache Webserver Deployment](#04--hands-on-apache-webserver-deployment)
+  - [Namespace erstellen](#namespace-erstellen)
+  - [Pod erstellen](#pod-erstellen)
+  - [YAML anzeigen](#yaml-anzeigen)
+  - [Service erstellen](#service-erstellen)
+  - [Zugriff auf den Webserver](#zugriff-auf-den-webserver)
+- [05 – Deployment via YAML](#05--deployment-via-yaml)
+  - [apache-pod.yaml](#apache-podyaml)
+  - [apache-service.yaml](#apache-serviceyaml)
+  - [Namespace für YAML Variante](#namespace-für-yaml-variante)
+- [06 – Wichtige Erkenntnisse](#06--wichtige-erkenntnisse)
+- [07 – Reflexion](#07--reflexion)
 
 <!-- /TOC -->
 
@@ -1215,3 +1169,435 @@ Ursachen verstanden.
 Lösungen dokumentiert.
 
 Ziel: Verständnis von Container-Härtung erreicht.
+
+
+# 40 – Jenkins Blue Ocean Dokumentation
+
+## 1. Blue Ocean Container starten
+
+Zuerst wurde Jenkins mit dem Blue Ocean Image als Docker-Container gestartet.
+
+```powershell
+docker run `
+  --rm `
+  -u root `
+  -p 8095:8080 `
+  -v jenkins-data:/var/jenkins_home `
+  -v /var/run/docker.sock:/var/run/docker.sock `
+  -v ${HOME}:/home `
+  jenkinsci/blueocean
+```
+
+### Erklärung der Parameter
+
+- `--rm` → Container wird nach Stop automatisch gelöscht  
+- `-u root` → Container läuft als Root (benötigt für Docker Socket Zugriff)  
+- `-p 8095:8080` → Port 8095 (Host) wird auf 8080 (Container) gemappt  
+- `-v jenkins-data:/var/jenkins_home` → Persistente Jenkins-Daten  
+- `-v /var/run/docker.sock:/var/run/docker.sock` → Jenkins kann Docker-Befehle ausführen  
+- `-v ${HOME}:/home` → Home-Verzeichnis wird eingebunden  
+
+---
+
+## 2. Port-Problem
+
+Beim ersten Versuch wurde Port `8082` verwendet:
+
+```powershell
+-p 8082:8080
+```
+
+Fehlermeldung:
+
+```
+Bind for 0.0.0.0:8082 failed: port is already allocated
+```
+
+### Lösung
+
+Ein freier Port wurde gewählt:
+
+```powershell
+-p 8095:8080
+```
+
+Danach startete Jenkins erfolgreich.
+
+---
+
+## 3. Initial Setup
+
+Nach dem Start war Jenkins unter folgendem Link erreichbar:
+
+```
+http://localhost:8095
+```
+
+Jenkins verlangte das Initial Admin Passwort.
+
+Im Terminal wurde folgendes angezeigt:
+
+```
+Jenkins initial setup is required.
+Please use the following password to proceed to installation:
+
+0c22ba45c6b34d0bbf7977c9b1188374
+```
+
+Alternativ befindet sich das Passwort hier:
+
+```
+/var/jenkins_home/secrets/initialAdminPassword
+```
+
+---
+
+## 4. Admin User erstellen
+
+Im Browser wurde der erste Admin-User erstellt:
+
+- Username: GentiMenti_Admin  
+- Password: ********  
+- Full Name: Gent  
+
+Danach wurde die Installation fortgesetzt.
+
+![Blueocean](Images/blueocean.png)
+
+---
+
+## 5. Plugin-Installationsproblem
+
+Während der Plugin-Installation traten mehrere Fehler auf.
+
+Beispiel:
+
+```
+Failed to load: commons-lang3-api
+Jenkins (2.479.3) or higher required
+```
+
+### Ursache
+
+Das verwendete Jenkins-Image basiert auf Version:
+
+```
+Jenkins 2.346.3
+```
+
+Viele aktuelle Plugins benötigen jedoch:
+
+```
+Jenkins >= 2.479.x
+```
+
+Dadurch konnten mehrere Plugins nicht installiert werden.
+
+---
+
+## 6. Safe Restart
+
+Nach der Plugin-Installation wurde Jenkins neu gestartet:
+
+```
+Scheduling Jenkins reboot
+Restart in 10 seconds
+Stopping Jenkins
+Jenkins stopped
+```
+
+---
+
+## 7. Ergebnis
+
+- Blue Ocean Container erfolgreich gestartet  
+- Port-Konflikt erkannt und gelöst  
+- Admin-User erstellt  
+- Plugin-Version-Konflikt identifiziert  
+- Jenkins erfolgreich neu gestartet  
+
+---
+
+## 8. Fazit
+
+Blue Ocean ermöglicht eine moderne Pipeline-Ansicht für Jenkins.  
+Die Installation via Docker ist einfach, jedoch können Versionskonflikte zwischen Jenkins-Core und Plugins auftreten.
+
+Für eine saubere Umgebung sollte ein aktuelleres Jenkins-Image verwendet werden.
+
+
+# 40 – Kubernetes (K8s) Dokumentation
+
+## Lernziel
+
+Ich kann einen einfachen Kubernetes Cluster aufsetzen und eine Web-Applikation mittels Pod und Service bereitstellen.
+
+---
+
+# 01 – Grundbegriffe
+
+## Service Discovery
+
+Service Discovery ist der Prozess, bei dem Clients automatisch die IP-Adresse und den Port eines Service erhalten.
+
+In verteilten Systemen mit mehreren Instanzen ist dies notwendig, da Container dynamisch starten und stoppen.
+
+Typische Funktionen:
+- Health Checking
+- Failover
+- Load Balancing
+- Verschlüsselung
+- Isolation von Containergruppen
+
+---
+
+## Load Balancing
+
+Lastverteilung bedeutet, Anfragen auf mehrere Systeme zu verteilen.
+
+In Kubernetes werden Anfragen auf mehrere Pods verteilt, um:
+- Performance zu erhöhen
+- Ausfälle zu vermeiden
+- Skalierung zu ermöglichen
+
+---
+
+## Cluster
+
+Ein Cluster ist ein Verbund mehrerer vernetzter Computer (Nodes).
+
+Arten:
+- HPC Cluster → Rechenleistung erhöhen
+- HA Cluster → Verfügbarkeit erhöhen
+
+---
+
+# 02 – Kubernetes
+
+Kubernetes (K8s) ist ein Open-Source-System zur Orchestrierung von Container-Anwendungen.
+
+Eigenschaften:
+- Deklarative Konfiguration (YAML)
+- Selbstheilung (Pods werden neu gestartet)
+- Automatische Skalierung
+- Abstraktion der Infrastruktur
+
+---
+
+## Wichtige Objekte
+
+| Objekt | Beschreibung |
+|--------|-------------|
+| Pod | Kleinste deploybare Einheit |
+| ReplicaSet | Stellt sicher, dass N Pods laufen |
+| Deployment | Ermöglicht deklarative Updates |
+| Service | Stabile IP + Zugriff auf Pods |
+| Ingress | Externer Zugriff (Reverse Proxy) |
+| Namespace | Logische Trennung |
+| Labels | Gruppierung von Ressourcen |
+
+---
+
+# 03 – Beispiel: Eigene Installation & Aufsetzung
+
+## Variante: Kubernetes mit Vagrant (Projekt lernkube)
+
+### Voraussetzungen
+
+- 16 GB RAM
+- 40 GB Festplattenspeicher
+- VirtualBox installiert
+- Vagrant installiert
+
+---
+
+## Schritt 1 – Repository klonen
+
+```bash
+git clone https://github.com/mc-b/lernkube
+cd lernkube
+```
+
+---
+
+## Schritt 2 – Cluster starten
+
+```bash
+vagrant up
+```
+
+Am Ende erscheint:
+
+```
+VM: master-01, Cluster-IP: 192.168.60.100
+Dashboard token: eyJhbGciOiJQA.....
+```
+
+Der Token wird für das Dashboard benötigt.
+
+---
+
+## Schritt 3 – Zugriff auf kubectl aktivieren (Windows)
+
+```powershell
+kubeps.bat
+```
+
+Alternativ:
+
+```bash
+vagrant ssh master-01
+```
+
+---
+
+# 04 – Hands-On: Apache Webserver Deployment
+
+## Namespace erstellen
+
+```bash
+kubectl create namespace test
+```
+
+---
+
+## Pod erstellen
+
+```bash
+kubectl run apache --image=httpd --restart=Never --namespace test
+```
+
+Kontrolle:
+
+```bash
+kubectl get pods -n test
+```
+
+---
+
+## YAML anzeigen
+
+```bash
+kubectl get pod apache -o yaml --namespace test
+```
+
+---
+
+## Service erstellen
+
+```bash
+kubectl expose pod/apache --type="LoadBalancer" --port 80 --namespace test
+```
+
+Kontrolle:
+
+```bash
+kubectl get pods,service -n test
+```
+
+---
+
+## Zugriff auf den Webserver
+
+Cluster-IP anzeigen:
+
+```bash
+kubectl config view -o=jsonpath='{ .clusters[0].cluster.server }'
+```
+
+NodePort anzeigen:
+
+```bash
+kubectl get service apache -n test
+```
+
+Dann im Browser:
+
+```
+http://localhost:31245
+```
+
+Apache Default Page erscheint.
+
+---
+
+# 05 – Deployment via YAML
+
+## apache-pod.yaml
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app.kubernetes.io/name: apache
+  name: apache
+spec:
+  containers:
+  - image: httpd
+    name: apache
+```
+
+---
+
+## apache-service.yaml
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app.kubernetes.io/name: apache
+  name: apache
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app.kubernetes.io/name: apache
+  type: LoadBalancer
+```
+
+---
+
+## Namespace für YAML Variante
+
+```bash
+kubectl create namespace yaml
+```
+
+Deployment starten:
+
+```bash
+kubectl apply -f apache -n yaml
+```
+
+Kontrolle:
+
+```bash
+kubectl get pods,service -n yaml
+```
+
+---
+
+# 06 – Wichtige Erkenntnisse
+
+- Kubernetes arbeitet deklarativ (YAML)
+- Jede Ressource wird intern als YAML gespeichert
+- Services bleiben stabil, auch wenn Pods ersetzt werden
+- Namespaces ermöglichen saubere Trennung
+- LoadBalancer veröffentlicht Services nach aussen
+
+---
+
+# 07 – Reflexion
+
+Durch das praktische Aufsetzen eines Clusters und das Erstellen von Pods und Services habe ich verstanden:
+
+- Wie Kubernetes Container orchestriert
+- Wie Services Pods erreichbar machen
+- Wie Ressourcen deklarativ via YAML definiert werden
+- Wie Namespaces zur Strukturierung genutzt werden
+
+Kubernetes abstrahiert Infrastruktur vollständig und ermöglicht skalierbare, selbstheilende Anwendungen.
